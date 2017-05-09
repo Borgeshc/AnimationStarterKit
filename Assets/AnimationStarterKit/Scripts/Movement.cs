@@ -11,7 +11,7 @@ public class Movement : MonoBehaviour
     float vertical;
     float horizontal;
 
-    bool isCrouching;
+    public static bool isCrouching;
 
     Vector3 direction;
 
@@ -63,7 +63,9 @@ public class Movement : MonoBehaviour
 
     void IdleCrouch()                                               //Set up idle crouching state in the animator
     {
-        print("CrouchIdle");
+        if (!isCrouching)
+            isCrouching = true;
+        
         anim.SetBool("Sprinting", false);
         anim.SetBool("Idle", true);
         anim.SetBool("Crouching", true);
@@ -71,6 +73,9 @@ public class Movement : MonoBehaviour
 
     void Move()                                                     //Set up movement state in the animator and apply movement
     {
+        if (isCrouching)
+            isCrouching = false;
+
         anim.SetBool("Idle", false);
         anim.SetBool("Sprinting", false);
         anim.SetBool("Crouching", false);
@@ -81,7 +86,10 @@ public class Movement : MonoBehaviour
 
     void Sprint()                                                   //Set up sprinting state in the animator and apply sprint movement
     {
-        isCrouching = false;
+
+        if (isCrouching)
+            isCrouching = false;
+        
         anim.SetBool("Idle", false);
         anim.SetBool("Crouching", false);
         anim.SetBool("Sprinting", true);
@@ -92,6 +100,9 @@ public class Movement : MonoBehaviour
 
     void Crouch()                                                   //Set up crouching state in the animator and apply crouch movement
     {
+        if (!isCrouching)
+            isCrouching = true;
+
         anim.SetBool("Idle", false);
         anim.SetBool("Sprinting", false);
         anim.SetBool("Crouching", true);

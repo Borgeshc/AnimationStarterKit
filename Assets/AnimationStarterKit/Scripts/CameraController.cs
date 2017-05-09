@@ -8,6 +8,7 @@ public class CameraController : MonoBehaviour
     public GameObject player;
     public Vector3 distance;
     public Vector3 zoomedDistance;
+    public Vector3 crouchZoomedDistance;
     public float zoomSpd = 2.0f;
     public float speed;
     public float rotationSpeed;
@@ -53,9 +54,15 @@ public class CameraController : MonoBehaviour
         rotation = Quaternion.Euler(y, x, 0.0f);                                    //Clamp the y axis
 
         if (inputDevice.LeftTrigger)                                                //If pressing left trigger we are aiming
-            Aim();
+        {
+            if (Movement.isCrouching)
+                CrouchAim();
+            else
+                Aim();
+        }
         else
         {
+            anim.SetBool("CrouchAiming", false);
             anim.SetBool("Aiming", false);
             position = rotation * distance + player.transform.position;
         }
@@ -91,7 +98,15 @@ public class CameraController : MonoBehaviour
 
     void Aim()                                                                      //Camera aim
     {
+        anim.SetBool("CrouchAiming", false);
         anim.SetBool("Aiming", true);
         position = rotation * zoomedDistance + player.transform.position;
+    }
+
+    void CrouchAim()                                                                      //Camera aim
+    {
+        anim.SetBool("Aiming", false);
+        anim.SetBool("CrouchAiming", true);
+        position = rotation * crouchZoomedDistance + player.transform.position;
     }
 }
