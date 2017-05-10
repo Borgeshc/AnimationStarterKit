@@ -64,7 +64,7 @@ public class CameraController : MonoBehaviour
         {
             anim.SetBool("CrouchAiming", false);
             anim.SetBool("Aiming", false);
-            position = rotation * distance + player.transform.position;
+            position = Vector3.Lerp(position, rotation * distance + player.transform.position, zoomSpd * Time.deltaTime);
         }
 
         if (horizontal != 0)                                                        //If there is input from the right stick rotate the player accordingly
@@ -100,13 +100,13 @@ public class CameraController : MonoBehaviour
     {
         anim.SetBool("CrouchAiming", false);
         anim.SetBool("Aiming", true);
-        position = rotation * zoomedDistance + player.transform.position;
+        position = Vector3.Lerp(position, rotation * zoomedDistance + player.transform.position, zoomSpd * Time.deltaTime);
     }
 
     void CrouchAim()                                                                //Camera aim
     {
         anim.SetBool("Aiming", false);
         anim.SetBool("CrouchAiming", true);
-        position = rotation * crouchZoomedDistance + player.transform.position;
+        position = Vector3.Lerp(position, rotation * crouchZoomedDistance + player.transform.position, zoomSpd * Time.deltaTime);
     }
 }

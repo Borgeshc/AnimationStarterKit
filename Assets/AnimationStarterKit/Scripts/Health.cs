@@ -9,6 +9,7 @@ public class Health : MonoBehaviour
     Animator anim;
     Shooting shooting;
     Movement movement;
+    GameObject collisionDetection;
 
     void Start()
     {
@@ -16,6 +17,7 @@ public class Health : MonoBehaviour
         anim = GetComponent<Animator>();                                                                    //Reference the animator.
         shooting = GetComponent<Shooting>();                                                                //Reference the shooting script.
         movement = GetComponent<Movement>();                                                                //Reference the movement script.
+        collisionDetection = transform.FindChild("CollisionDetection").gameObject;
     }
 
     public void TookDamage(float damage, CollisionDetection.CollisionFlag collisionLocation)                //This is called from CollisionDetection to determine the damage and the location of the incoming collision.
@@ -42,6 +44,7 @@ public class Health : MonoBehaviour
     {                                                                                                       //We take in the collision location in order to determine which death animation we want to play.
         shooting.canShoot = false;                                                                          //Stop all shooting and movement
         movement.canMove = false;
+        Destroy(collisionDetection);
 
         switch (collisionLocation)
         {
