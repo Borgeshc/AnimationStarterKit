@@ -12,6 +12,7 @@ public class Movement : MonoBehaviour
     float horizontal;
 
     public static bool isCrouching;
+    public static bool canMove;
 
     Vector3 direction;
 
@@ -21,47 +22,51 @@ public class Movement : MonoBehaviour
 
     private void Start()
     {
+        canMove = true;
         anim = GetComponent<Animator>();
         cc = GetComponent<CharacterController>();
     }
 
     private void Update()
     {
-        inputDevice = InputManager.ActiveDevice;                    //Check which device is active
+        inputDevice = InputManager.ActiveDevice;                                            //Check which device is active
 
-        vertical = inputDevice.LeftStick.Y;                         //Set the vertical and horizontal to the active device's Left Stick axes
-        horizontal = inputDevice.LeftStick.X;
-        direction = new Vector3(horizontal, 0, vertical);           //Store the input as the direction
+        if(canMove)
+        {
+            vertical = inputDevice.LeftStick.Y;                                             //Set the vertical and horizontal to the active device's Left Stick axes
+            horizontal = inputDevice.LeftStick.X;
+            direction = new Vector3(horizontal, 0, vertical);                               //Store the input as the direction
 
-        anim.SetFloat("Vertical", vertical);                        //Apply the input values to the animation parameters
-        anim.SetFloat("Horizontal", horizontal);
+            anim.SetFloat("Vertical", vertical);                                            //Apply the input values to the animation parameters
+            anim.SetFloat("Horizontal", horizontal);
 
-        if (inputDevice.RightStickButton.WasPressed)                //Toggle crouching
-            isCrouching = !isCrouching;
+            if (inputDevice.RightStickButton.WasPressed)                                    //Toggle crouching
+                isCrouching = !isCrouching;
 
-        if (inputDevice.LeftStickButton)                            //If the Leftstick is pressed then we are sprinting
-            Sprint();
+            if (inputDevice.LeftStickButton)                                                //If the Leftstick is pressed then we are sprinting
+                Sprint();
 
-        if (!isCrouching && direction.Equals(Vector3.zero))         //If there is no input the character is Idle
-            Idle();
-        else if (isCrouching && direction.Equals(Vector3.zero))     //If there is no input and crouching is toggled character is IdleCrouching
-            IdleCrouch();
+            if (!isCrouching && direction.Equals(Vector3.zero))                             //If there is no input the character is Idle
+                Idle();
+            else if (isCrouching && direction.Equals(Vector3.zero))                         //If there is no input and crouching is toggled character is IdleCrouching
+                IdleCrouch();
 
 
-        if (isCrouching && !direction.Equals(Vector3.zero))         //If there is input and crouching is toggled character is Crouching
-            Crouch();
-        else if(!isCrouching && !direction.Equals(Vector3.zero))    //If there is input and crouching is not toggled then we are moving
-            Move();                                                 //If we are not idle and the left stick is not pressed then we are moving
+            if (isCrouching && !direction.Equals(Vector3.zero))                             //If there is input and crouching is toggled character is Crouching
+                Crouch();
+            else if (!isCrouching && !direction.Equals(Vector3.zero))                       //If there is input and crouching is not toggled then we are moving
+                Move();                                                                     //If we are not idle and the left stick is not pressed then we are moving
+        }
     }
 
-    void Idle()                                                     //Set up idle state in the animator
+    void Idle()                                                                             //Set up idle state in the animator
     {
         anim.SetBool("Sprinting", false);
         anim.SetBool("Crouching", false);
         anim.SetBool("Idle", true);
     }
 
-    void IdleCrouch()                                               //Set up idle crouching state in the animator
+    void IdleCrouch()                                                                       //Set up idle crouching state in the animator
     {
         if (!isCrouching)
             isCrouching = true;
@@ -71,7 +76,7 @@ public class Movement : MonoBehaviour
         anim.SetBool("Crouching", true);
     }
 
-    void Move()                                                     //Set up movement state in the animator and apply movement
+    void Move()                                                                             //Set up movement state in the animator and apply movement
     {
         if (isCrouching)
             isCrouching = false;
@@ -84,7 +89,7 @@ public class Movement : MonoBehaviour
         cc.SimpleMove(transform.right * horizontal * moveSpeed * Time.deltaTime);
     }
 
-    void Sprint()                                                   //Set up sprinting state in the animator and apply sprint movement
+    void Sprint()                                                                           //Set up sprinting state in the animator and apply sprint movement
     {
 
         if (isCrouching)
@@ -98,7 +103,7 @@ public class Movement : MonoBehaviour
         cc.SimpleMove(transform.right * horizontal * sprintSpeed * Time.deltaTime);
     }
 
-    void Crouch()                                                   //Set up crouching state in the animator and apply crouch movement
+    void Crouch()                                                                           //Set up crouching state in the animator and apply crouch movement
     {
         if (!isCrouching)
             isCrouching = true;

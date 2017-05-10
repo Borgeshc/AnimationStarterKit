@@ -145,7 +145,7 @@ ModelImporter:
     400134: swat:Spine
     400136: swat:Spine1
     400138: swat:Spine2
-    7400000: death_back
+    7400000: death_back_headshot
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -169,7 +169,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: death_back
+      name: death_back_headshot
       takeName: mixamo.com
       firstFrame: 0
       lastFrame: 111

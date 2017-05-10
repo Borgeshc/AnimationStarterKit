@@ -86,8 +86,8 @@ public class CameraController : MonoBehaviour
 
     void CameraFollow()                                                             //Camera follow
     {
-        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
-        transform.position = Vector3.Lerp(transform.position, position, speed * Time.deltaTime);
+        transform.rotation = rotation;
+        transform.position =  position;
     }
 
     void Turn()                                                                     //Character y rotation
@@ -103,7 +103,7 @@ public class CameraController : MonoBehaviour
         position = rotation * zoomedDistance + player.transform.position;
     }
 
-    void CrouchAim()                                                                      //Camera aim
+    void CrouchAim()                                                                //Camera aim
     {
         anim.SetBool("Aiming", false);
         anim.SetBool("CrouchAiming", true);
