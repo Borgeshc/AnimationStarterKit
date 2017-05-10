@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 using InControl;
 
 public class Shooting : MonoBehaviour
 {
     public GameObject muzzleFlash;
     public GameObject bulletHole;
+    public Text ammoText;
     public float bulletDamage;
     public float headshotDamage;
     public float fireFreq;
@@ -22,11 +24,14 @@ public class Shooting : MonoBehaviour
 
     InputDevice inputDevice;
     RaycastHit hit;
+    Animator anim;
 
     void Start()
     {
         canShoot = true;
-        ammo = maxAmmo;                                                                                         //Set the ammo to the max ammo.                                                          
+        anim = GetComponent<Animator>();                                                                        //Reference animator.
+        ammo = maxAmmo;                                                                                         //Set the ammo to the max ammo. 
+        ammoText.text = ammo + "/" + maxAmmo;
     }
 
     void Update()
@@ -61,8 +66,9 @@ public class Shooting : MonoBehaviour
     IEnumerator Fire()                                                                                          //Subtracts ammo and checks to see if we need to reload.
     {                                                                                                           //Apply the fire frequency.
         ammo--;
+        ammoText.text = ammo + "/" + maxAmmo;
 
-        if(ammo <= 0)
+        if (ammo <= 0)
         {
             reloading = true;
             StartCoroutine(Reload());
@@ -73,9 +79,24 @@ public class Shooting : MonoBehaviour
 
     IEnumerator Reload()                                                                                        //Wait the length of the reload time and reset ammo count to max ammo.
     {
+        if (anim.GetBool("Crouching"))                                                                          //Check which animation state is currently activate and play the correct reload animation.
+            anim.SetBool("ReloadCrouch", true);
+        else if (anim.GetBool("Idle"))
+            anim.SetBool("ReloadIdle", true);
+        else if (IsRunning())
+            anim.SetBool("ReloadRun", true);
+        else if (!IsRunning())
+            anim.SetBool("ReloadWalk", true);
+
         yield return new WaitForSeconds(reloadTime);
         ammo = maxAmmo;
+        ammoText.text = ammo + "/" + maxAmmo;
         reloading = false;
+
+        anim.SetBool("ReloadCrouch", false);                                                                      //Reset reload animations.
+        anim.SetBool("ReloadIdle", false);
+        anim.SetBool("ReloadRun", false);
+        anim.SetBool("ReloadWalk", false);
     }
 
     IEnumerator MuzzleFlash()                                                                                   //Activate and DeActivate the muzzle flash
@@ -83,5 +104,12 @@ public class Shooting : MonoBehaviour
         muzzleFlash.SetActive(true);
         yield return new WaitForSeconds(.05f);
         muzzleFlash.SetActive(false);
+    }
+
+    bool IsRunning()                                                                                            //Returns true if we are running or false if we are walking
+    {
+        if (anim.GetFloat("Horizontal") < -.5f || anim.GetFloat("Horizontal") > .5f || anim.GetFloat("Vertical") > .5f || anim.GetFloat("Vertical") < -.5f)
+            return true;
+        else return false;
     }
 }
