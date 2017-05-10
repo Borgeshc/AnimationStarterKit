@@ -25,6 +25,7 @@ public class Shooting : MonoBehaviour
     InputDevice inputDevice;
     RaycastHit hit;
     Animator anim;
+    CameraController camControl;
 
     void Start()
     {
@@ -32,6 +33,7 @@ public class Shooting : MonoBehaviour
         anim = GetComponent<Animator>();                                                                        //Reference animator.
         ammo = maxAmmo;                                                                                         //Set the ammo to the max ammo. 
         ammoText.text = ammo + "/" + maxAmmo;
+        camControl = GetComponentInChildren<CameraController>();
     }
 
     void Update()
@@ -44,7 +46,7 @@ public class Shooting : MonoBehaviour
             StartCoroutine(Reload());
         }
 
-        if(inputDevice.RightTrigger && Physics.Raycast(Camera.main.transform.position,  Camera.main.transform.forward, out hit, 1000, layermask) && !reloading && canShoot)
+        if(inputDevice.RightTrigger && Physics.Raycast(Camera.main.transform.position,  Camera.main.transform.forward, out hit, 1000, layermask) && !reloading && canShoot && camControl.isAiming)
         {                                                                                                       //Check to see if we are shooting. Raycast from the camera to see what the player is shooting at.
             if(!firing)
             {

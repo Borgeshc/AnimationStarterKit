@@ -6,6 +6,7 @@ using InControl;
 public class CameraController : MonoBehaviour
 {
     public GameObject player;
+    public GameObject reticle;
     public Vector3 distance;
     public Vector3 zoomedDistance;
     public Vector3 crouchZoomedDistance;
@@ -17,7 +18,10 @@ public class CameraController : MonoBehaviour
     public float ySpeed;
 
     public int yMinLimit;
-    public int yMaxLimit = 877;
+    public int yMaxLimit;
+
+    [HideInInspector]
+    public bool isAiming;
 
     private float x = 0.0f;
     private float y = 0.0f;
@@ -45,6 +49,7 @@ public class CameraController : MonoBehaviour
         vertical = inputDevice.RightStick.Y;    
 
         anim.SetFloat("Horizontal2", horizontal);                                   //apply the input value to the horizontal2 parameter
+       
 
         x -= -horizontal * xSpeed * 0.02f;
         y += -vertical * ySpeed * 0.02f;                                      
@@ -52,6 +57,9 @@ public class CameraController : MonoBehaviour
         y = ClampAngle(y, yMinLimit, yMaxLimit);                             
 
         rotation = Quaternion.Euler(y, x, 0.0f);                                    //Clamp the y axis
+
+        anim.SetFloat("Vertical2", transform.localRotation.x);
+        print(transform.localRotation.x);
 
         if (inputDevice.LeftTrigger)                                                //If pressing left trigger we are aiming
         {
@@ -62,6 +70,8 @@ public class CameraController : MonoBehaviour
         }
         else
         {
+            reticle.SetActive(false);
+            isAiming = false;
             anim.SetBool("CrouchAiming", false);
             anim.SetBool("Aiming", false);
             position = Vector3.Lerp(position, rotation * distance + player.transform.position, zoomSpd * Time.deltaTime);
@@ -98,6 +108,8 @@ public class CameraController : MonoBehaviour
 
     void Aim()                                                                      //Camera aim
     {
+        reticle.SetActive(true);
+        isAiming = true;
         anim.SetBool("CrouchAiming", false);
         anim.SetBool("Aiming", true);
         position = Vector3.Lerp(position, rotation * zoomedDistance + player.transform.position, zoomSpd * Time.deltaTime);
@@ -105,6 +117,8 @@ public class CameraController : MonoBehaviour
 
     void CrouchAim()                                                                //Camera aim
     {
+        reticle.SetActive(true);
+        isAiming = true;
         anim.SetBool("Aiming", false);
         anim.SetBool("CrouchAiming", true);
         position = Vector3.Lerp(position, rotation * crouchZoomedDistance + player.transform.position, zoomSpd * Time.deltaTime);
