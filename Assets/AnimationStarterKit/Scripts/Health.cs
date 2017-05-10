@@ -7,11 +7,15 @@ public class Health : MonoBehaviour
 
     float health;
     Animator anim;
+    Shooting shooting;
+    Movement movement;
 
     void Start()
     {
         health = baseHealth;                                                                                //Set our health to the baseHealth.
         anim = GetComponent<Animator>();                                                                    //Reference the animator.
+        shooting = GetComponent<Shooting>();                                                                //Reference the shooting script.
+        movement = GetComponent<Movement>();                                                                //Reference the movement script.
     }
 
     public void TookDamage(float damage, CollisionDetection.CollisionFlag collisionLocation)                //This is called from CollisionDetection to determine the damage and the location of the incoming collision.
@@ -36,8 +40,8 @@ public class Health : MonoBehaviour
 
     void Died(CollisionDetection.CollisionFlag collisionLocation)                                           //Died gets called when health is or goes below 0.
     {                                                                                                       //We take in the collision location in order to determine which death animation we want to play.
-        Shooting.canShoot = false;                                                                          //Stop all shooting and movement
-        Movement.canMove = false;
+        shooting.canShoot = false;                                                                          //Stop all shooting and movement
+        movement.canMove = false;
 
         switch (collisionLocation)
         {

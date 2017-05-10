@@ -8,11 +8,13 @@ public class Movement : MonoBehaviour
     public float sprintSpeed;
     public float crouchSpeed;
 
+    [HideInInspector]
+    public bool canMove;
+
     float vertical;
     float horizontal;
 
     public static bool isCrouching;
-    public static bool canMove;
 
     Vector3 direction;
 

@@ -13,7 +13,8 @@ public class Shooting : MonoBehaviour
     public float reloadTime;
     public LayerMask layermask;
 
-    public static bool canShoot;
+    [HideInInspector]
+    public bool canShoot;
 
     float ammo;
     bool reloading;
