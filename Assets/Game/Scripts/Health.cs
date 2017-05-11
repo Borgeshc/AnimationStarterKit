@@ -8,7 +8,6 @@ public class Health : NetworkBehaviour
 
     [SyncVar]
     float health;
-
     Animator anim;
     Shooting shooting;
     Movement movement;
@@ -23,7 +22,20 @@ public class Health : NetworkBehaviour
         collisionDetection = transform.FindChild("CollisionDetection").gameObject;
     }
 
-    public void TookDamage(float damage, CollisionDetection.CollisionFlag collisionLocation)                //This is called from CollisionDetection to determine the damage and the location of the incoming collision.
+    [Command]
+    public void CmdTookDamage(float damage, CollisionDetection.CollisionFlag collisionLocation)
+    {
+        RpcTookDamage(damage, collisionLocation);
+    }
+
+    [Command]
+    public void CmdHeadshotDamage(float headshotDamage, CollisionDetection.CollisionFlag collisionLocation)
+    {
+        RpcHeadshotDamage(headshotDamage, collisionLocation);
+    }
+
+    [ClientRpc]
+    public void RpcTookDamage(float damage, CollisionDetection.CollisionFlag collisionLocation)                //This is called from CollisionDetection to determine the damage and the location of the incoming collision.
     {
         print("took damage called");
         health -= damage;
@@ -34,7 +46,8 @@ public class Health : NetworkBehaviour
         }
     }
 
-    public void HeadshotDamage(float headshotDamage, CollisionDetection.CollisionFlag collisionLocation)    //This is called from CollisionDetection to determine the damage and the location of the incoming collision.
+    [ClientRpc]
+    public void RpcHeadshotDamage(float headshotDamage, CollisionDetection.CollisionFlag collisionLocation)    //This is called from CollisionDetection to determine the damage and the location of the incoming collision.
     {                                                                                                       //This is a seperate method from TookDamage in order to have different damage for headshots.
         health -= headshotDamage;
 
@@ -44,8 +57,16 @@ public class Health : NetworkBehaviour
         }
     }
 
+    void Init()                                                                                              //Used to reReference scripts as needed
+    {
+        shooting = GetComponent<Shooting>();
+        movement = GetComponent<Movement>();
+        anim = GetComponent<Animator>();
+    }
+
     void Died(CollisionDetection.CollisionFlag collisionLocation)                                           //Died gets called when health is or goes below 0.
-    {                                                                                                       //We take in the collision location in order to determine which death animation we want to play.
+    {
+        Init();                                                                                            
         shooting.canShoot = false;                                                                          //Stop all shooting and movement
         movement.canMove = false;
         Destroy(collisionDetection);

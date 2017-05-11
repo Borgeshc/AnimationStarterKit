@@ -52,19 +52,26 @@ public class Shooting : NetworkBehaviour
             if(!firing)
             {
                 firing = true;
-       
-                RpcFire();
+
+                StartCoroutine(Fire());
                 
             }
         }
     }
 
-    [ClientRpc]
-    void RpcFire()
-    {
-        StartCoroutine(Fire());
-    }
+    //[Command]
+    //void CmdFire()
+    //{
+    //    RpcFire();
+    //}
+
+    //[ClientRpc]
+    //void RpcFire()
+    //{
+    //    StartCoroutine(Fire());
+    //}
     
+    [Client]
     IEnumerator Fire()                                                                                          //Subtracts ammo and checks to see if we need to reload.
     {
         CmdStartMuzzleFlash();
@@ -72,9 +79,16 @@ public class Shooting : NetworkBehaviour
         {
             print(hit.transform.name);
             if (hit.transform.tag == "Collision")
+            {
+                Debug.LogError(hit.transform.parent.transform.parent.name);
                 CmdPlayerShot(hit.transform.parent.transform.parent.name);
+            }
             else
-                Instantiate(bulletHole, hit.point + (hit.normal * .1f), Quaternion.LookRotation(hit.normal));   //Spawn the bullet hole where the raycast hit.
+            {
+                Vector3 position = hit.point + (hit.normal * .1f);
+                Quaternion rotation = Quaternion.LookRotation(hit.normal);
+                CmdBulletHole(position, rotation);                                                                    //Spawn the bullet hole where the raycast hit.
+            }
         }
 
         ammo--;
@@ -93,7 +107,8 @@ public class Shooting : NetworkBehaviour
     void CmdPlayerShot(string hitPlayer)
     {
         print("called player shot");
-        GameManager.GetPlayer(hitPlayer).transform.gameObject.GetComponent<CollisionDetection>().OnHit(transform.gameObject);    //If the raycast hit a player collider, let the CollisionDetection script on that object know.
+        if(GameManager.GetPlayer(hitPlayer).transform.gameObject.GetComponentInChildren<CollisionDetection>() != null)
+        GameManager.GetPlayer(hitPlayer).transform.gameObject.GetComponentInChildren<CollisionDetection>().OnHit(transform.gameObject);    //If the raycast hit a player collider, let the CollisionDetection script on that object know.
     }
 
     IEnumerator Reload()                                                                                        //Wait the length of the reload time and reset ammo count to max ammo.
@@ -103,11 +118,18 @@ public class Shooting : NetworkBehaviour
         ammo = maxAmmo;
         ammoText.text = ammo + "/" + maxAmmo;
         reloading = false;
+        
         anim.SetBool("ReloadIdle", false);
     }
 
     [Command]
     void CmdStartMuzzleFlash()
+    {
+        RpcStartMuzzleFlash();
+    }
+
+    [ClientRpc]
+    void RpcStartMuzzleFlash()
     {
         StartCoroutine(MuzzleFlash());                                                                  //Activate the MuzzleFlash
     }
@@ -117,5 +139,12 @@ public class Shooting : NetworkBehaviour
         muzzleFlash.SetActive(true);
         yield return new WaitForSeconds(.05f);
         muzzleFlash.SetActive(false);
+    }
+
+    [Command]
+    void CmdBulletHole(Vector3 position, Quaternion rotation)
+    {
+        GameObject hole = Instantiate(bulletHole, position, rotation) as GameObject;
+        NetworkServer.Spawn(hole);
     }
 }
