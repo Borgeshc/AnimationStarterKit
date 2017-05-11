@@ -15,4 +15,17 @@ public class PlayerSetup : NetworkBehaviour
             }
         }
     }
+
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        string netId = GetComponent<NetworkIdentity>().netId.ToString();
+        
+        GameManager.RegisterPlayer(netId, this.gameObject);
+    }
+
+    private void OnDisable()
+    {
+        GameManager.UnRegisterPlayer(transform.name);
+    }
 }

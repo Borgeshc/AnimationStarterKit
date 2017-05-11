@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class CollisionDetection : MonoBehaviour
+public class CollisionDetection : NetworkBehaviour
 {
     public enum CollisionFlag                                                                                              //List of possible collision locations
     {
@@ -21,9 +22,10 @@ public class CollisionDetection : MonoBehaviour
     {
         health = GetComponentInParent<Health>();                                                                            //References to the health and shooting scripts
     }
-
+    
     public void OnHit(GameObject other)                                                                                            //Gets called from the shooting scripts raycast, we use other to determine how much damage we will take.
     {
+        print("collision called");
         switch(collisionLocation)                                                                                           //Find the collisionLocation this collider is marked with.
         {
             case CollisionFlag.FrontHeadShot:

@@ -61,7 +61,6 @@ public class CameraController : MonoBehaviour
         rotation = Quaternion.Euler(y, x, 0.0f);                                    //Clamp the y axis
 
         anim.SetFloat("Vertical2", transform.localRotation.x);
-        print(transform.localRotation.x);
 
         if (inputDevice.LeftTrigger)                                                //If pressing left trigger we are aiming
         {

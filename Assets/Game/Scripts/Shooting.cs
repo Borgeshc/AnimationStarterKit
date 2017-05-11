@@ -2,8 +2,9 @@
 using System.Collections;
 using UnityEngine.UI;
 using InControl;
+using UnityEngine.Networking;
 
-public class Shooting : MonoBehaviour
+public class Shooting : NetworkBehaviour
 {
     public GameObject muzzleFlash;
     public GameObject bulletHole;
@@ -46,25 +47,36 @@ public class Shooting : MonoBehaviour
             StartCoroutine(Reload());
         }
 
-        if(inputDevice.RightTrigger && Physics.Raycast(Camera.main.transform.position,  Camera.main.transform.forward, out hit, 1000, layermask) && !reloading && canShoot && camControl.isAiming)
+        if(inputDevice.RightTrigger && !reloading && canShoot && camControl.isAiming)
         {                                                                                                       //Check to see if we are shooting. Raycast from the camera to see what the player is shooting at.
             if(!firing)
             {
                 firing = true;
-                if (hit.transform.tag == "Collision")
-                    hit.transform.gameObject.GetComponent<CollisionDetection>().OnHit(transform.gameObject);    //If the raycast hit a player collider, let the CollisionDetection script on that object know.
-                else
-                Instantiate(bulletHole, hit.point + (hit.normal * .1f), Quaternion.LookRotation(hit.normal));   //Spawn the bullet hole where the raycast hit.
-                StartCoroutine(Fire());       
-                                                                                                                //We pass this gameobject so the CollisionDetection can know how much damage to apply.
-                StartCoroutine(MuzzleFlash());                                                                  //Activate the MuzzleFlash
-                                                                                
+       
+                RpcFire();
+                
             }
         }
     }
 
+    [ClientRpc]
+    void RpcFire()
+    {
+        StartCoroutine(Fire());
+    }
+    
     IEnumerator Fire()                                                                                          //Subtracts ammo and checks to see if we need to reload.
-    {                                                                                                           //Apply the fire frequency.
+    {
+        CmdStartMuzzleFlash();
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 1000, layermask))
+        {
+            print(hit.transform.name);
+            if (hit.transform.tag == "Collision")
+                CmdPlayerShot(hit.transform.parent.transform.parent.name);
+            else
+                Instantiate(bulletHole, hit.point + (hit.normal * .1f), Quaternion.LookRotation(hit.normal));   //Spawn the bullet hole where the raycast hit.
+        }
+
         ammo--;
         ammoText.text = ammo + "/" + maxAmmo;
 
@@ -77,6 +89,13 @@ public class Shooting : MonoBehaviour
         firing = false;
     }
 
+    [Command]
+    void CmdPlayerShot(string hitPlayer)
+    {
+        print("called player shot");
+        GameManager.GetPlayer(hitPlayer).transform.gameObject.GetComponent<CollisionDetection>().OnHit(transform.gameObject);    //If the raycast hit a player collider, let the CollisionDetection script on that object know.
+    }
+
     IEnumerator Reload()                                                                                        //Wait the length of the reload time and reset ammo count to max ammo.
     {
         anim.SetBool("ReloadIdle", true);
@@ -87,6 +106,12 @@ public class Shooting : MonoBehaviour
         anim.SetBool("ReloadIdle", false);
     }
 
+    [Command]
+    void CmdStartMuzzleFlash()
+    {
+        StartCoroutine(MuzzleFlash());                                                                  //Activate the MuzzleFlash
+    }
+    
     IEnumerator MuzzleFlash()                                                                                   //Activate and DeActivate the muzzle flash
     {
         muzzleFlash.SetActive(true);

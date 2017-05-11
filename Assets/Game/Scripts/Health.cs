@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class Health : MonoBehaviour
+public class Health : NetworkBehaviour
 {
     public float baseHealth;
 
+    [SyncVar]
     float health;
+
     Animator anim;
     Shooting shooting;
     Movement movement;
@@ -22,6 +25,7 @@ public class Health : MonoBehaviour
 
     public void TookDamage(float damage, CollisionDetection.CollisionFlag collisionLocation)                //This is called from CollisionDetection to determine the damage and the location of the incoming collision.
     {
+        print("took damage called");
         health -= damage;
 
         if(health <= 0)
@@ -49,27 +53,21 @@ public class Health : MonoBehaviour
         switch (collisionLocation)
         {
             case CollisionDetection.CollisionFlag.FrontHeadShot:
-                print("FrontHeadShot");
                 anim.SetTrigger("FrontHeadShot");
                 break;
             case CollisionDetection.CollisionFlag.BackHeadShot:
-                print("BackHeadShot");
                 anim.SetTrigger("BackHeadShot");
                 break;
             case CollisionDetection.CollisionFlag.Front:
-                print("Front");
                 anim.SetTrigger("Front");
                 break;
             case CollisionDetection.CollisionFlag.Back:
-                print("Back");
                 anim.SetTrigger("Back");
                 break;
             case CollisionDetection.CollisionFlag.Left:
-                print("Left");
                 anim.SetTrigger("Left");
                 break;
             case CollisionDetection.CollisionFlag.Right:
-                print("Right");
                 anim.SetTrigger("Right");
                 break;
         }
