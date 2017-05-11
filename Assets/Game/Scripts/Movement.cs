@@ -29,7 +29,7 @@ public class Movement : MonoBehaviour
         cc = GetComponent<CharacterController>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         inputDevice = InputManager.ActiveDevice;                                            //Check which device is active
 
