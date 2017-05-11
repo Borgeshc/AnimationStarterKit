@@ -32,6 +32,7 @@ public class CameraController : MonoBehaviour
     Vector3 position;
     Quaternion rotation;
     Animator anim;
+    int aimLimit;
 
     void Start()
     {
@@ -39,6 +40,7 @@ public class CameraController : MonoBehaviour
         Vector3 angles = transform.eulerAngles;
         x = angles.y;
         y = angles.x;
+        aimLimit = yMaxLimit;
     }
 
     public void LateUpdate()
@@ -108,6 +110,7 @@ public class CameraController : MonoBehaviour
 
     void Aim()                                                                      //Camera aim
     {
+        yMaxLimit = aimLimit;
         reticle.SetActive(true);
         isAiming = true;
         anim.SetBool("CrouchAiming", false);
@@ -117,6 +120,7 @@ public class CameraController : MonoBehaviour
 
     void CrouchAim()                                                                //Camera aim
     {
+        yMaxLimit = (aimLimit - 10);
         reticle.SetActive(true);
         isAiming = true;
         anim.SetBool("Aiming", false);
