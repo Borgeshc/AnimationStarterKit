@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 public class Health : NetworkBehaviour
 {
     public float baseHealth;
+    public float respawnTime;
 
     [SyncVar]
     float health;
@@ -12,14 +13,12 @@ public class Health : NetworkBehaviour
     Shooting shooting;
     Movement movement;
     GameObject collisionDetection;
+    [SyncVar]
+    bool isDead;
 
     void Start()
     {
-        health = baseHealth;                                                                                //Set our health to the baseHealth.
-        anim = GetComponent<Animator>();                                                                    //Reference the animator.
-        shooting = GetComponent<Shooting>();                                                                //Reference the shooting script.
-        movement = GetComponent<Movement>();                                                                //Reference the movement script.
-        collisionDetection = transform.FindChild("CollisionDetection").gameObject;
+        Init();
     }
 
     [Command]
@@ -48,51 +47,87 @@ public class Health : NetworkBehaviour
 
     [ClientRpc]
     public void RpcHeadshotDamage(float headshotDamage, CollisionDetection.CollisionFlag collisionLocation)    //This is called from CollisionDetection to determine the damage and the location of the incoming collision.
-    {                                                                                                       //This is a seperate method from TookDamage in order to have different damage for headshots.
+    {
+        if (isDead)
+            return;
+
         health -= headshotDamage;
 
         if (health <= 0)
         {
-            Died(collisionLocation);                                                                        
+            Died(collisionLocation);
         }
     }
 
-    void Init()                                                                                              //Used to reReference scripts as needed
+    public void Init()                                                                                      //Used to reReference scripts as needed
     {
+        isDead = false;
+        health = baseHealth;
+        anim = GetComponent<Animator>();                                                                    //Set our health to the baseHealth.
         shooting = GetComponent<Shooting>();
         movement = GetComponent<Movement>();
-        anim = GetComponent<Animator>();
+        shooting.canShoot = true;
+        movement.canMove = true;
+        collisionDetection = transform.FindChild("CollisionDetection").gameObject;
+        foreach (Transform go in collisionDetection.GetComponentsInChildren<Transform>())
+            go.gameObject.layer = LayerMask.NameToLayer("Collision");
     }
 
     void Died(CollisionDetection.CollisionFlag collisionLocation)                                           //Died gets called when health is or goes below 0.
     {
-        Init();                                                                                            
+        print("Died");
+        Init();
+        isDead = true;                                                                                 
         shooting.canShoot = false;                                                                          //Stop all shooting and movement
         movement.canMove = false;
-        Destroy(collisionDetection);
+
+        foreach(Transform go in collisionDetection.GetComponentsInChildren<Transform>())
+            go.gameObject.layer = LayerMask.NameToLayer("Default");
 
         switch (collisionLocation)
         {
             case CollisionDetection.CollisionFlag.FrontHeadShot:
-                anim.SetTrigger("FrontHeadShot");
+                anim.SetBool("FrontHeadShot", true);
                 break;
             case CollisionDetection.CollisionFlag.BackHeadShot:
-                anim.SetTrigger("BackHeadShot");
+                anim.SetBool("BackHeadShot", true);
                 break;
             case CollisionDetection.CollisionFlag.Front:
-                anim.SetTrigger("Front");
+                anim.SetBool("Front", true);
                 break;
             case CollisionDetection.CollisionFlag.Back:
-                anim.SetTrigger("Back");
+                anim.SetBool("Back", true);
                 break;
             case CollisionDetection.CollisionFlag.Left:
-                anim.SetTrigger("Left");
+                anim.SetBool("Left", true);
                 break;
             case CollisionDetection.CollisionFlag.Right:
-                anim.SetTrigger("Right");
+                anim.SetBool("Right", true);
                 break;
         }
+        StartCoroutine(Respawn());
+    }
 
-        Destroy(gameObject, 10);                                                                            //Destroy the gameobject after 10seconds.
+    IEnumerator Respawn()
+    {
+        print("Respawning..");
+        yield return new WaitForSeconds(respawnTime);
+        Transform respawnpoint = NetworkManager.singleton.GetStartPosition();
+        transform.position = respawnpoint.position;
+        transform.rotation = respawnpoint.rotation;
+
+        ResetDeathAnims();
+        Init();
+        shooting.ResetAmmo();
+    }
+
+    void ResetDeathAnims()
+    {
+        anim.SetBool("FrontHeadShot", false);
+        anim.SetBool("BackHeadShot", false);
+        anim.SetBool("Front",false);
+        anim.SetBool("Back", false);
+        anim.SetBool("Left", false);
+        anim.SetBool("Right", false);
     }
 }

@@ -32,8 +32,7 @@ public class Shooting : NetworkBehaviour
     {
         canShoot = true;
         anim = GetComponent<Animator>();                                                                        //Reference animator.
-        ammo = maxAmmo;                                                                                         //Set the ammo to the max ammo. 
-        ammoText.text = ammo + "/" + maxAmmo;
+        ResetAmmo();
         camControl = GetComponentInChildren<CameraController>();
     }
 
@@ -115,11 +114,16 @@ public class Shooting : NetworkBehaviour
     {
         anim.SetBool("ReloadIdle", true);
         yield return new WaitForSeconds(reloadTime);
-        ammo = maxAmmo;
-        ammoText.text = ammo + "/" + maxAmmo;
+        ResetAmmo();
         reloading = false;
         
         anim.SetBool("ReloadIdle", false);
+    }
+
+    public void ResetAmmo()
+    {
+        ammo = maxAmmo;                                                                                         //Set the ammo to the max ammo. 
+        ammoText.text = ammo + "/" + maxAmmo;
     }
 
     [Command]
