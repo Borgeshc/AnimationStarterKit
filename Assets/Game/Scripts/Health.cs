@@ -36,7 +36,6 @@ public class Health : NetworkBehaviour
     [ClientRpc]
     public void RpcTookDamage(float damage, CollisionDetection.CollisionFlag collisionLocation)                //This is called from CollisionDetection to determine the damage and the location of the incoming collision.
     {
-        print("took damage called");
         health -= damage;
 
         if(health <= 0)
@@ -75,7 +74,6 @@ public class Health : NetworkBehaviour
 
     void Died(CollisionDetection.CollisionFlag collisionLocation)                                           //Died gets called when health is or goes below 0.
     {
-        print("Died");
         Init();
         isDead = true;                                                                                 
         shooting.canShoot = false;                                                                          //Stop all shooting and movement
@@ -110,7 +108,6 @@ public class Health : NetworkBehaviour
 
     IEnumerator Respawn()
     {
-        print("Respawning..");
         yield return new WaitForSeconds(respawnTime);
         Transform respawnpoint = NetworkManager.singleton.GetStartPosition();
         transform.position = respawnpoint.position;

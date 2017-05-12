@@ -57,18 +57,6 @@ public class Shooting : NetworkBehaviour
             }
         }
     }
-
-    //[Command]
-    //void CmdFire()
-    //{
-    //    RpcFire();
-    //}
-
-    //[ClientRpc]
-    //void RpcFire()
-    //{
-    //    StartCoroutine(Fire());
-    //}
     
     [Client]
     IEnumerator Fire()                                                                                          //Subtracts ammo and checks to see if we need to reload.
@@ -76,7 +64,6 @@ public class Shooting : NetworkBehaviour
         CmdStartMuzzleFlash();
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 1000, layermask))
         {
-            print(hit.transform.name);
             if (hit.transform.tag == "Collision")
             {
                 Debug.LogError(hit.transform.parent.transform.parent.name);
@@ -105,7 +92,6 @@ public class Shooting : NetworkBehaviour
     [Command]
     void CmdPlayerShot(string hitPlayer)
     {
-        print("called player shot");
         if(GameManager.GetPlayer(hitPlayer).transform.gameObject.GetComponentInChildren<CollisionDetection>() != null)
         GameManager.GetPlayer(hitPlayer).transform.gameObject.GetComponentInChildren<CollisionDetection>().OnHit(transform.gameObject);    //If the raycast hit a player collider, let the CollisionDetection script on that object know.
     }

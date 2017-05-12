@@ -31,7 +31,6 @@ public class CollisionDetection : NetworkBehaviour
     
     public void OnHit(GameObject other)                                                                                            //Gets called from the shooting scripts raycast, we use other to determine how much damage we will take.
     {
-        print("collision called");
         switch(collisionLocation)                                                                                           //Find the collisionLocation this collider is marked with.
         {
             case CollisionFlag.FrontHeadShot:
