@@ -6,6 +6,8 @@ public class Health : NetworkBehaviour
 {
     public float baseHealth;
     public float respawnTime;
+    public AudioSource hitSouce;
+    public AudioClip[] hitEffects;
 
     [SyncVar]
     float health;
@@ -38,7 +40,13 @@ public class Health : NetworkBehaviour
     {
         health -= damage;
 
-        if(health <= 0)
+        if (!hitSouce.isPlaying)
+        {
+            hitSouce.clip = hitEffects[Random.Range(0, hitEffects.Length)];
+            hitSouce.Play();
+        }
+
+        if (health <= 0)
         {
             Died(collisionLocation);
         }
@@ -49,6 +57,12 @@ public class Health : NetworkBehaviour
     {
         if (isDead)
             return;
+
+        if(!hitSouce.isPlaying)
+        {
+            hitSouce.clip = hitEffects[Random.Range(0, hitEffects.Length)];
+            hitSouce.Play();
+        }
 
         health -= headshotDamage;
 

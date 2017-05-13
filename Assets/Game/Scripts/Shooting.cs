@@ -15,6 +15,9 @@ public class Shooting : NetworkBehaviour
     public float maxAmmo;
     public float reloadTime;
     public LayerMask layermask;
+    public AudioSource shootingSource;
+    public AudioClip shootingSound;
+    public AudioClip reloadSound;
 
     [HideInInspector]
     public bool canShoot;
@@ -53,7 +56,6 @@ public class Shooting : NetworkBehaviour
                 firing = true;
 
                 StartCoroutine(Fire());
-                
             }
         }
     }
@@ -61,6 +63,12 @@ public class Shooting : NetworkBehaviour
     [Client]
     IEnumerator Fire()                                                                                          //Subtracts ammo and checks to see if we need to reload.
     {
+        if(!shootingSource.isPlaying)
+        {
+            shootingSource.clip = shootingSound;
+            shootingSource.Play();
+        }
+
         CmdStartMuzzleFlash();
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 1000, layermask))
         {
@@ -98,6 +106,11 @@ public class Shooting : NetworkBehaviour
 
     IEnumerator Reload()                                                                                        //Wait the length of the reload time and reset ammo count to max ammo.
     {
+        if (!shootingSource.isPlaying)
+        {
+            shootingSource.clip = reloadSound;
+            shootingSource.Play();
+        }
         anim.SetBool("ReloadIdle", true);
         yield return new WaitForSeconds(reloadTime);
         ResetAmmo();

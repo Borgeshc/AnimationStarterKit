@@ -7,6 +7,10 @@ public class Movement : MonoBehaviour
     public float moveSpeed;
     public float sprintSpeed;
     public float crouchSpeed;
+    public AudioSource movementSource;
+    public AudioClip walkSound;
+    public AudioClip runSound;
+    public AudioClip sprintSound;
 
     [HideInInspector]
     public bool canMove;
@@ -63,6 +67,9 @@ public class Movement : MonoBehaviour
 
     void Idle()                                                                             //Set up idle state in the animator
     {
+        if(movementSource.isPlaying)
+        movementSource.Stop();
+
         anim.SetBool("Sprinting", false);
         anim.SetBool("Crouching", false);
         anim.SetBool("Idle", true);
@@ -70,6 +77,9 @@ public class Movement : MonoBehaviour
 
     void IdleCrouch()                                                                       //Set up idle crouching state in the animator
     {
+        if (movementSource.isPlaying)
+            movementSource.Stop();
+
         if (!isCrouching)
             isCrouching = true;
         
@@ -80,6 +90,19 @@ public class Movement : MonoBehaviour
 
     void Move()                                                                             //Set up movement state in the animator and apply movement
     {
+        if (horizontal > .5f || vertical > .5f)
+        {
+            if (movementSource.clip != runSound)
+                movementSource.clip = runSound;
+        }
+        else
+        {
+            if (movementSource.clip != walkSound)
+                movementSource.clip = walkSound;
+        }
+
+        movementSource.Play();
+
         if (isCrouching)
             isCrouching = false;
 
@@ -93,6 +116,10 @@ public class Movement : MonoBehaviour
 
     void Sprint()                                                                           //Set up sprinting state in the animator and apply sprint movement
     {
+        if (movementSource.clip != sprintSound)
+        movementSource.clip = sprintSound;
+
+        movementSource.Play();
 
         if (isCrouching)
             isCrouching = false;
@@ -107,6 +134,19 @@ public class Movement : MonoBehaviour
 
     void Crouch()                                                                           //Set up crouching state in the animator and apply crouch movement
     {
+        if (horizontal > .5f || vertical > .5f)
+        {
+            if (movementSource.clip != runSound)
+            movementSource.clip = runSound;
+        }
+        else
+        {
+            if (movementSource.clip != walkSound)
+                movementSource.clip = walkSound;
+        }
+
+        movementSource.Play();
+
         if (!isCrouching)
             isCrouching = true;
 
