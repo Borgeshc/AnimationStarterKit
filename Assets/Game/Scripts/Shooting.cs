@@ -58,6 +58,10 @@ public class Shooting : NetworkBehaviour
                 StartCoroutine(Fire());
             }
         }
+        if(inputDevice.RightTrigger.WasReleased && !reloading)
+        {
+            shootingSource.Stop();
+        }
     }
     
     [Client]
@@ -106,6 +110,7 @@ public class Shooting : NetworkBehaviour
 
     IEnumerator Reload()                                                                                        //Wait the length of the reload time and reset ammo count to max ammo.
     {
+        shootingSource.Stop();
         if (!shootingSource.isPlaying)
         {
             shootingSource.clip = reloadSound;

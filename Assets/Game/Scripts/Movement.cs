@@ -92,16 +92,20 @@ public class Movement : MonoBehaviour
     {
         if (horizontal > .5f || vertical > .5f)
         {
-            if (movementSource.clip != runSound)
+            if (movementSource.clip != runSound && !movementSource.isPlaying)
+            {
                 movementSource.clip = runSound;
+                movementSource.Play();
+            }
         }
         else
         {
-            if (movementSource.clip != walkSound)
+            if (movementSource.clip != walkSound && !movementSource.isPlaying)
+            {
                 movementSource.clip = walkSound;
+                movementSource.Play();
+            }
         }
-
-        movementSource.Play();
 
         if (isCrouching)
             isCrouching = false;
@@ -116,10 +120,11 @@ public class Movement : MonoBehaviour
 
     void Sprint()                                                                           //Set up sprinting state in the animator and apply sprint movement
     {
-        if (movementSource.clip != sprintSound)
-        movementSource.clip = sprintSound;
-
-        movementSource.Play();
+        if (movementSource.clip != sprintSound && !movementSource.isPlaying)
+        {
+            movementSource.clip = sprintSound;
+            movementSource.Play();
+        }
 
         if (isCrouching)
             isCrouching = false;
@@ -136,16 +141,21 @@ public class Movement : MonoBehaviour
     {
         if (horizontal > .5f || vertical > .5f)
         {
-            if (movementSource.clip != runSound)
-            movementSource.clip = runSound;
+            if (movementSource.clip != runSound && !movementSource.isPlaying)
+            {
+                movementSource.clip = runSound;
+                movementSource.Play();
+            }
         }
         else
         {
-            if (movementSource.clip != walkSound)
+            if (movementSource.clip != walkSound && !movementSource.isPlaying)
+            {
                 movementSource.clip = walkSound;
+                movementSource.Play();
+            }
         }
 
-        movementSource.Play();
 
         if (!isCrouching)
             isCrouching = true;
