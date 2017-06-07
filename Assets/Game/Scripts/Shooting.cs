@@ -79,7 +79,7 @@ public class Shooting : NetworkBehaviour
             if (hit.transform.tag == "Collision")
             {
                 Debug.LogError(hit.transform.parent.transform.parent.name);
-                CmdPlayerShot(hit.transform.parent.transform.parent.name);
+                CmdPlayerShot(hit.transform.parent.transform.parent.name, hit.transform.name);
             }
             else
             {
@@ -102,10 +102,10 @@ public class Shooting : NetworkBehaviour
     }
 
     [Command]
-    void CmdPlayerShot(string hitPlayer)
+    void CmdPlayerShot(string hitPlayer, string hitCollider)
     {
-        if(GameManager.GetPlayer(hitPlayer).transform.gameObject.GetComponentInChildren<CollisionDetection>() != null)
-        GameManager.GetPlayer(hitPlayer).transform.gameObject.GetComponentInChildren<CollisionDetection>().OnHit(transform.gameObject);    //If the raycast hit a player collider, let the CollisionDetection script on that object know.
+        if(GameManager.GetPlayer(hitPlayer).transform.Find("CollisionDetection").transform.Find(hitCollider).GetComponent<CollisionDetection>() != null)
+        GameManager.GetPlayer(hitPlayer).transform.Find("CollisionDetection").transform.Find(hitCollider).GetComponent<CollisionDetection>().OnHit(transform.gameObject);    //If the raycast hit a player collider, let the CollisionDetection script on that object know.
     }
 
     IEnumerator Reload()                                                                                        //Wait the length of the reload time and reset ammo count to max ammo.

@@ -81,7 +81,7 @@ public class Health : NetworkBehaviour
         movement = GetComponent<Movement>();
         shooting.canShoot = true;
         movement.canMove = true;
-        collisionDetection = transform.FindChild("CollisionDetection").gameObject;
+        collisionDetection = transform.Find("CollisionDetection").gameObject;
         foreach (Transform go in collisionDetection.GetComponentsInChildren<Transform>())
             go.gameObject.layer = LayerMask.NameToLayer("Collision");
     }

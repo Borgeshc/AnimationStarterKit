@@ -2,11 +2,11 @@ Mono path[0] = 'C:/Users/Hector/Documents/GitHub/AnimationStarterKit/TestBuild_D
 Mono path[1] = 'C:/Users/Hector/Documents/GitHub/AnimationStarterKit/TestBuild_Data/Mono'
 Mono config path = 'C:/Users/Hector/Documents/GitHub/AnimationStarterKit/TestBuild_Data/Mono/etc'
 PlayerConnection initialized from C:/Users/Hector/Documents/GitHub/AnimationStarterKit/TestBuild_Data (debug = 0)
-PlayerConnection initialized network socket : 0.0.0.0 55363
-Multi-casting "[IP] 192.168.0.3 [Port] 55363 [Flags] 2 [Guid] 2684020477 [EditorId] 2744835589 [Version] 1048832 [Id] WindowsPlayer(Hector-PC) [Debug] 0" to [225.0.0.222:54997]...
-Started listening to [0.0.0.0:55363]
-PlayerConnection already initialized - listening to [0.0.0.0:55363]
-Player data archive not found at `C:/Users/Hector/Documents/GitHub/AnimationStarterKit/TestBuild_Data/data.unity3d`, using local filesystemInitialize engine version: 5.6.0f3 (497a0f351392)
+PlayerConnection initialized network socket : 0.0.0.0 55214
+Multi-casting "[IP] 192.168.0.3 [Port] 55214 [Flags] 2 [Guid] 1226792207 [EditorId] 2196970810 [Version] 1048832 [Id] WindowsPlayer(Hector-PC) [Debug] 0" to [225.0.0.222:54997]...
+Started listening to [0.0.0.0:55214]
+PlayerConnection already initialized - listening to [0.0.0.0:55214]
+Player data archive not found at `C:/Users/Hector/Documents/GitHub/AnimationStarterKit/TestBuild_Data/data.unity3d`, using local filesystemInitialize engine version: 5.6.1f1 (2860b30f0b54)
 GfxDevice: creating device client; threaded=1
 Direct3D:
     Version:  Direct3D 11.0 [level 11.1]
@@ -27,17 +27,17 @@ Platform assembly: C:\Users\Hector\Documents\GitHub\AnimationStarterKit\TestBuil
 Loading C:\Users\Hector\Documents\GitHub\AnimationStarterKit\TestBuild_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: C:\Users\Hector\Documents\GitHub\AnimationStarterKit\TestBuild_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
 Loading C:\Users\Hector\Documents\GitHub\AnimationStarterKit\TestBuild_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
-- Completed reload, in  0.334 seconds
+- Completed reload, in  0.048 seconds
 Platform assembly: C:\Users\Hector\Documents\GitHub\AnimationStarterKit\TestBuild_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\Hector\Documents\GitHub\AnimationStarterKit\TestBuild_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 5760x1276 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.849032 ms
+UnloadTime: 1.907615 ms
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 1c6c -> priority: 1 
-  Thread -> id: 1a24 -> priority: 1 
+  Thread -> id: 1784 -> priority: 1 
+  Thread -> id: 3130 -> priority: 1 
 MatchMakingClient ListMatches :https://mm.unet.unity3d.com/json/reply/ListMatchRequest
 UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
 UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
@@ -123,12 +123,132 @@ UnityEngine.Networking.NetworkLobbyPlayer:Start() (at C:\buildslave\unity\build\
 (Filename: C:/buildslave/unity/build/Extensions/Networking/Runtime/NetworkLobbyPlayer.cs Line: 24)
 
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 4.305163 ms
-System memory in use before: 85.8 MB.
-System memory in use after: 85.9 MB.
+UnloadTime: 4.238642 ms
+System memory in use before: 85.5 MB.
+System memory in use after: 85.7 MB.
 
-Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 3295.
-Total: 2.440281 ms (FindLiveObjects: 0.228970 ms CreateObjectMapping: 0.105570 ms MarkObjects: 2.084513 ms  DeleteObjects: 0.019529 ms)
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 3306.
+Total: 2.931614 ms (FindLiveObjects: 0.335106 ms CreateObjectMapping: 0.118872 ms MarkObjects: 2.436030 ms  DeleteObjects: 0.039624 ms)
+
+Player 10
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object)
+UnityEngine.Debug:LogError(Object)
+<Fire>c__Iterator0:MoveNext() (at C:\Users\Hector\Documents\GitHub\AnimationStarterKit\Assets\Game\Scripts\Shooting.cs:81)
+UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr) (at C:\buildslave\unity\build\Runtime\Export\Coroutines.cs:17)
+UnityEngine.MonoBehaviour:StartCoroutine_Auto_Internal(IEnumerator)
+UnityEngine.MonoBehaviour:StartCoroutine(IEnumerator) (at C:\buildslave\unity\build\artifacts\generated\common\runtime\MonoBehaviourBindings.gen.cs:62)
+Shooting:Update() (at C:\Users\Hector\Documents\GitHub\AnimationStarterKit\Assets\Game\Scripts\Shooting.cs:58)
+ 
+(Filename: C:/Users/Hector/Documents/GitHub/AnimationStarterKit/Assets/Game/Scripts/Shooting.cs Line: 81)
+
+Can not play a disabled audio source
+UnityEngine.AudioSource:Play(UInt64)
+UnityEngine.AudioSource:Play() (at C:\buildslave\unity\build\artifacts\generated\common\modules\Audio\AudioBindings.gen.cs:610)
+Health:RpcTookDamage(Single, CollisionFlag) (at C:\Users\Hector\Documents\GitHub\AnimationStarterKit\Assets\Game\Scripts\Health.cs:46)
+Health:InvokeRpcRpcTookDamage(NetworkBehaviour, NetworkReader)
+UnityEngine.Networking.NetworkIdentity:HandleRPC(Int32, NetworkReader) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkIdentity.cs:660)
+UnityEngine.Networking.ClientScene:OnRPCMessage(NetworkMessage) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\ClientScene.cs:739)
+UnityEngine.Networking.NetworkConnection:HandleReader(NetworkReader, Int32, Int32) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkConnection.cs:469)
+UnityEngine.Networking.NetworkConnection:HandleBytes(Byte[], Int32, Int32) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkConnection.cs:425)
+UnityEngine.Networking.NetworkConnection:TransportReceive(Byte[], Int32, Int32) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkConnection.cs:576)
+UnityEngine.Networking.NetworkClient:Update() (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkClient.cs:735)
+UnityEngine.Networking.NetworkClient:UpdateClients() (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkClient.cs:947)
+UnityEngine.Networking.NetworkIdentity:UNetStaticUpdate() (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkIdentity.cs:1091)
+
+[C:/buildslave/unity/build/Runtime/Audio/AudioSource.cpp line 536] 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/modules/Audio/AudioBindings.gen.cs Line: 610)
+
+Player 10
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object)
+UnityEngine.Debug:LogError(Object)
+<Fire>c__Iterator0:MoveNext() (at C:\Users\Hector\Documents\GitHub\AnimationStarterKit\Assets\Game\Scripts\Shooting.cs:81)
+UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr) (at C:\buildslave\unity\build\Runtime\Export\Coroutines.cs:17)
+UnityEngine.MonoBehaviour:StartCoroutine_Auto_Internal(IEnumerator)
+UnityEngine.MonoBehaviour:StartCoroutine(IEnumerator) (at C:\buildslave\unity\build\artifacts\generated\common\runtime\MonoBehaviourBindings.gen.cs:62)
+Shooting:Update() (at C:\Users\Hector\Documents\GitHub\AnimationStarterKit\Assets\Game\Scripts\Shooting.cs:58)
+ 
+(Filename: C:/Users/Hector/Documents/GitHub/AnimationStarterKit/Assets/Game/Scripts/Shooting.cs Line: 81)
+
+Can not play a disabled audio source
+UnityEngine.AudioSource:Play(UInt64)
+UnityEngine.AudioSource:Play() (at C:\buildslave\unity\build\artifacts\generated\common\modules\Audio\AudioBindings.gen.cs:610)
+Health:RpcTookDamage(Single, CollisionFlag) (at C:\Users\Hector\Documents\GitHub\AnimationStarterKit\Assets\Game\Scripts\Health.cs:46)
+Health:InvokeRpcRpcTookDamage(NetworkBehaviour, NetworkReader)
+UnityEngine.Networking.NetworkIdentity:HandleRPC(Int32, NetworkReader) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkIdentity.cs:660)
+UnityEngine.Networking.ClientScene:OnRPCMessage(NetworkMessage) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\ClientScene.cs:739)
+UnityEngine.Networking.NetworkConnection:HandleReader(NetworkReader, Int32, Int32) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkConnection.cs:469)
+UnityEngine.Networking.NetworkConnection:HandleBytes(Byte[], Int32, Int32) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkConnection.cs:425)
+UnityEngine.Networking.NetworkConnection:TransportReceive(Byte[], Int32, Int32) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkConnection.cs:576)
+UnityEngine.Networking.NetworkClient:Update() (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkClient.cs:735)
+UnityEngine.Networking.NetworkClient:UpdateClients() (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkClient.cs:947)
+UnityEngine.Networking.NetworkIdentity:UNetStaticUpdate() (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkIdentity.cs:1091)
+
+[C:/buildslave/unity/build/Runtime/Audio/AudioSource.cpp line 536] 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/modules/Audio/AudioBindings.gen.cs Line: 610)
+
+Player 10
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object)
+UnityEngine.Debug:LogError(Object)
+<Fire>c__Iterator0:MoveNext() (at C:\Users\Hector\Documents\GitHub\AnimationStarterKit\Assets\Game\Scripts\Shooting.cs:81)
+UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr) (at C:\buildslave\unity\build\Runtime\Export\Coroutines.cs:17)
+UnityEngine.MonoBehaviour:StartCoroutine_Auto_Internal(IEnumerator)
+UnityEngine.MonoBehaviour:StartCoroutine(IEnumerator) (at C:\buildslave\unity\build\artifacts\generated\common\runtime\MonoBehaviourBindings.gen.cs:62)
+Shooting:Update() (at C:\Users\Hector\Documents\GitHub\AnimationStarterKit\Assets\Game\Scripts\Shooting.cs:58)
+ 
+(Filename: C:/Users/Hector/Documents/GitHub/AnimationStarterKit/Assets/Game/Scripts/Shooting.cs Line: 81)
+
+Can not play a disabled audio source
+UnityEngine.AudioSource:Play(UInt64)
+UnityEngine.AudioSource:Play() (at C:\buildslave\unity\build\artifacts\generated\common\modules\Audio\AudioBindings.gen.cs:610)
+Health:RpcHeadshotDamage(Single, CollisionFlag) (at C:\Users\Hector\Documents\GitHub\AnimationStarterKit\Assets\Game\Scripts\Health.cs:64)
+Health:InvokeRpcRpcHeadshotDamage(NetworkBehaviour, NetworkReader)
+UnityEngine.Networking.NetworkIdentity:HandleRPC(Int32, NetworkReader) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkIdentity.cs:660)
+UnityEngine.Networking.ClientScene:OnRPCMessage(NetworkMessage) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\ClientScene.cs:739)
+UnityEngine.Networking.NetworkConnection:HandleReader(NetworkReader, Int32, Int32) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkConnection.cs:469)
+UnityEngine.Networking.NetworkConnection:HandleBytes(Byte[], Int32, Int32) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkConnection.cs:425)
+UnityEngine.Networking.NetworkConnection:TransportReceive(Byte[], Int32, Int32) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkConnection.cs:576)
+UnityEngine.Networking.NetworkClient:Update() (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkClient.cs:735)
+UnityEngine.Networking.NetworkClient:UpdateClients() (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkClient.cs:947)
+UnityEngine.Networking.NetworkIdentity:UNetStaticUpdate() (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkIdentity.cs:1091)
+
+[C:/buildslave/unity/build/Runtime/Audio/AudioSource.cpp line 536] 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/modules/Audio/AudioBindings.gen.cs Line: 610)
+
+Player 10
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object)
+UnityEngine.Debug:LogError(Object)
+<Fire>c__Iterator0:MoveNext() (at C:\Users\Hector\Documents\GitHub\AnimationStarterKit\Assets\Game\Scripts\Shooting.cs:81)
+UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr) (at C:\buildslave\unity\build\Runtime\Export\Coroutines.cs:17)
+UnityEngine.MonoBehaviour:StartCoroutine_Auto_Internal(IEnumerator)
+UnityEngine.MonoBehaviour:StartCoroutine(IEnumerator) (at C:\buildslave\unity\build\artifacts\generated\common\runtime\MonoBehaviourBindings.gen.cs:62)
+Shooting:Update() (at C:\Users\Hector\Documents\GitHub\AnimationStarterKit\Assets\Game\Scripts\Shooting.cs:58)
+ 
+(Filename: C:/Users/Hector/Documents/GitHub/AnimationStarterKit/Assets/Game/Scripts/Shooting.cs Line: 81)
+
+Can not play a disabled audio source
+UnityEngine.AudioSource:Play(UInt64)
+UnityEngine.AudioSource:Play() (at C:\buildslave\unity\build\artifacts\generated\common\modules\Audio\AudioBindings.gen.cs:610)
+Health:RpcTookDamage(Single, CollisionFlag) (at C:\Users\Hector\Documents\GitHub\AnimationStarterKit\Assets\Game\Scripts\Health.cs:46)
+Health:InvokeRpcRpcTookDamage(NetworkBehaviour, NetworkReader)
+UnityEngine.Networking.NetworkIdentity:HandleRPC(Int32, NetworkReader) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkIdentity.cs:660)
+UnityEngine.Networking.ClientScene:OnRPCMessage(NetworkMessage) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\ClientScene.cs:739)
+UnityEngine.Networking.NetworkConnection:HandleReader(NetworkReader, Int32, Int32) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkConnection.cs:469)
+UnityEngine.Networking.NetworkConnection:HandleBytes(Byte[], Int32, Int32) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkConnection.cs:425)
+UnityEngine.Networking.NetworkConnection:TransportReceive(Byte[], Int32, Int32) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkConnection.cs:576)
+UnityEngine.Networking.NetworkClient:Update() (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkClient.cs:735)
+UnityEngine.Networking.NetworkClient:UpdateClients() (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkClient.cs:947)
+UnityEngine.Networking.NetworkIdentity:UNetStaticUpdate() (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkIdentity.cs:1091)
+
+[C:/buildslave/unity/build/Runtime/Audio/AudioSource.cpp line 536] 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/modules/Audio/AudioBindings.gen.cs Line: 610)
 
 Player 10
 UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
@@ -189,4 +309,97 @@ UnityEngine.Networking.NetworkIdentity:UNetStaticUpdate() (at C:\buildslave\unit
 
 [C:/buildslave/unity/build/Runtime/Audio/AudioSource.cpp line 536] 
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/modules/Audio/AudioBindings.gen.cs Line: 610)
+
+Player 10
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object)
+UnityEngine.Debug:LogError(Object)
+<Fire>c__Iterator0:MoveNext() (at C:\Users\Hector\Documents\GitHub\AnimationStarterKit\Assets\Game\Scripts\Shooting.cs:81)
+UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr) (at C:\buildslave\unity\build\Runtime\Export\Coroutines.cs:17)
+UnityEngine.MonoBehaviour:StartCoroutine_Auto_Internal(IEnumerator)
+UnityEngine.MonoBehaviour:StartCoroutine(IEnumerator) (at C:\buildslave\unity\build\artifacts\generated\common\runtime\MonoBehaviourBindings.gen.cs:62)
+Shooting:Update() (at C:\Users\Hector\Documents\GitHub\AnimationStarterKit\Assets\Game\Scripts\Shooting.cs:58)
+ 
+(Filename: C:/Users/Hector/Documents/GitHub/AnimationStarterKit/Assets/Game/Scripts/Shooting.cs Line: 81)
+
+Can not play a disabled audio source
+UnityEngine.AudioSource:Play(UInt64)
+UnityEngine.AudioSource:Play() (at C:\buildslave\unity\build\artifacts\generated\common\modules\Audio\AudioBindings.gen.cs:610)
+Health:RpcTookDamage(Single, CollisionFlag) (at C:\Users\Hector\Documents\GitHub\AnimationStarterKit\Assets\Game\Scripts\Health.cs:46)
+Health:InvokeRpcRpcTookDamage(NetworkBehaviour, NetworkReader)
+UnityEngine.Networking.NetworkIdentity:HandleRPC(Int32, NetworkReader) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkIdentity.cs:660)
+UnityEngine.Networking.ClientScene:OnRPCMessage(NetworkMessage) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\ClientScene.cs:739)
+UnityEngine.Networking.NetworkConnection:HandleReader(NetworkReader, Int32, Int32) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkConnection.cs:469)
+UnityEngine.Networking.NetworkConnection:HandleBytes(Byte[], Int32, Int32) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkConnection.cs:425)
+UnityEngine.Networking.NetworkConnection:TransportReceive(Byte[], Int32, Int32) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkConnection.cs:576)
+UnityEngine.Networking.NetworkClient:Update() (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkClient.cs:735)
+UnityEngine.Networking.NetworkClient:UpdateClients() (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkClient.cs:947)
+UnityEngine.Networking.NetworkIdentity:UNetStaticUpdate() (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkIdentity.cs:1091)
+
+[C:/buildslave/unity/build/Runtime/Audio/AudioSource.cpp line 536] 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/modules/Audio/AudioBindings.gen.cs Line: 610)
+
+Log: connection {1} has been disconnected by timeout; address {::ffff:52.86.7.189:9999}
+MatchMakingClient DropConnection :https://mm.unet.unity3d.com/json/reply/DropConnectionRequest
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object)
+UnityEngine.Debug:Log(Object)
+UnityEngine.Networking.Match.NetworkMatch:DropConnection(DropConnectionRequest, BasicResponseDelegate) (at C:\buildslave\unity\build\Runtime\Networking\Managed\MatchMakingClient.cs:282)
+UnityEngine.Networking.Match.NetworkMatch:DropConnection(NetworkID, NodeID, Int32, BasicResponseDelegate) (at C:\buildslave\unity\build\Runtime\Networking\Managed\MatchMakingClient.cs:269)
+UnityEngine.Networking.NetworkManager:OnClientDisconnectInternal(NetworkMessage) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkManager.cs:955)
+UnityEngine.Networking.NetworkConnection:InvokeHandler(Int16, NetworkReader, Int32) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkConnection.cs:220)
+UnityEngine.Networking.NetworkConnection:InvokeHandlerNoData(Int16) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkConnection.cs:202)
+UnityEngine.Networking.NetworkClient:Update() (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkClient.cs:753)
+UnityEngine.Networking.NetworkClient:UpdateClients() (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkClient.cs:947)
+UnityEngine.Networking.NetworkIdentity:UNetStaticUpdate() (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkIdentity.cs:1091)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Networking/Managed/MatchMakingClient.cs Line: 282)
+
+MatchMakingClient DropConnection :https://mm.unet.unity3d.com/json/reply/DropConnectionRequest
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object)
+UnityEngine.Debug:Log(Object)
+UnityEngine.Networking.Match.NetworkMatch:DropConnection(DropConnectionRequest, BasicResponseDelegate) (at C:\buildslave\unity\build\Runtime\Networking\Managed\MatchMakingClient.cs:282)
+UnityEngine.Networking.Match.NetworkMatch:DropConnection(NetworkID, NodeID, Int32, BasicResponseDelegate) (at C:\buildslave\unity\build\Runtime\Networking\Managed\MatchMakingClient.cs:269)
+UnityEngine.Networking.NetworkManager:StopMatchMaker() (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkManager.cs:1184)
+UnityEngine.Networking.NetworkManager:StopClient() (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkManager.cs:620)
+UnityEngine.Networking.NetworkManager:OnClientDisconnect(NetworkConnection) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkManager.cs:1125)
+UnityEngine.Networking.NetworkLobbyManager:OnClientDisconnect(NetworkConnection) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkLobbyManager.cs:563)
+Prototype.NetworkLobby.LobbyManager:OnClientDisconnect(NetworkConnection) (at C:\Users\Hector\Documents\GitHub\AnimationStarterKit\Assets\Lobby\Scripts\Lobby\LobbyManager.cs:411)
+UnityEngine.Networking.NetworkManager:OnClientDisconnectInternal(NetworkMessage) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkManager.cs:958)
+UnityEngine.Networking.NetworkConnection:InvokeHandler(Int16, NetworkReader, Int32) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkConnection.cs:220)
+UnityEngine.Networking.NetworkConnection:InvokeHandlerNoData(Int16) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkConnection.cs:202)
+UnityEngine.Networking.NetworkClient:Update() (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkClient.cs:753)
+UnityEngine.Networking.NetworkClient:UpdateClients() (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkClient.cs:947)
+UnityEngine.Networking.NetworkIdentity:UNetStaticUpdate() (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkIdentity.cs:1091)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Networking/Managed/MatchMakingClient.cs Line: 282)
+
+ClientDisconnected due to error: Timeout
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object)
+UnityEngine.Debug:LogError(Object)
+UnityEngine.Networking.NetworkManager:OnClientDisconnect(NetworkConnection) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkManager.cs:1128)
+UnityEngine.Networking.NetworkLobbyManager:OnClientDisconnect(NetworkConnection) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkLobbyManager.cs:563)
+Prototype.NetworkLobby.LobbyManager:OnClientDisconnect(NetworkConnection) (at C:\Users\Hector\Documents\GitHub\AnimationStarterKit\Assets\Lobby\Scripts\Lobby\LobbyManager.cs:411)
+UnityEngine.Networking.NetworkManager:OnClientDisconnectInternal(NetworkMessage) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkManager.cs:958)
+UnityEngine.Networking.NetworkConnection:InvokeHandler(Int16, NetworkReader, Int32) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkConnection.cs:220)
+UnityEngine.Networking.NetworkConnection:InvokeHandlerNoData(Int16) (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkConnection.cs:202)
+UnityEngine.Networking.NetworkClient:Update() (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkClient.cs:753)
+UnityEngine.Networking.NetworkClient:UpdateClients() (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkClient.cs:947)
+UnityEngine.Networking.NetworkIdentity:UNetStaticUpdate() (at C:\buildslave\unity\build\Extensions\Networking\Runtime\NetworkIdentity.cs:1091)
+ 
+(Filename: C:/buildslave/unity/build/Extensions/Networking/Runtime/NetworkManager.cs Line: 1128)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.369860 ms
+System memory in use before: 83.6 MB.
+System memory in use after: 38.8 MB.
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 2169.
+Total: 8.540400 ms (FindLiveObjects: 0.154816 ms CreateObjectMapping: 0.131042 ms MarkObjects: 2.190644 ms  DeleteObjects: 6.062763 ms)
 
